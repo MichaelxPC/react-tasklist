@@ -22,4 +22,16 @@ function App() {
   );
 }
 
+function TodoItem() {
+  return(
+    <ul>
+      <li>
+        <span> V </span>
+        <p>Almorzar a las 3:00PM</p>
+        <span> X </span>
+      </li>
+    </ul>
+  );
+}
+
 export default App;
