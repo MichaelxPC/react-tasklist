@@ -1,7 +1,7 @@
 # react-tasklist
 
-This proyect is a TASK LIST made with react, you can add, delete a look for task!
+This proyect is a TASK LIST made with react, you can add, delete and look for task!
 
-Use this command for install nodeModules:
+command for dependecies nodeModules:
 
 npm install
