@@ -11,18 +11,10 @@ const defaultTodos = [
      {text: 'Hacer cursos en platzi', completed: true},
      {text: 'Ver la pantalla', completed: false},
      {text: 'Pasear al perro', completed: false},
-     {text: 'Tomar notar', completed: true}
+     {text: 'Tomar notar', completed: true},
 ];
 
 function TodoExample() {
- // Manipulation DOM
-  const checkButton = document.querySelector('.check-logo');
-  const deleteButton = document.querySelector('.delete-logo');
-
-  // Event listener
-
-  
-
   // React states
   const [searchValue, setSearchValue] = React.useState('');
   const [todo, setTodos] = React.useState(defaultTodos);
@@ -37,35 +29,39 @@ function TodoExample() {
       return todoText.includes(searchInput)
     }
   )
+  
+  const addTask = (text) => {
+    const newTodos = [...todo]
+    const taskIndex  = newTodos.findIndex(todo => (todo.text == text)) 
+    newTodos[taskIndex].completed = true;
+    setTodos(newTodos);
+  };
 
-  console.log(`Las busqueda de los usuarios es: ${searchValue}`); 
+  const deleteTask = (text) => {
+    const newTodos = [...todo];
+    const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
+    newTodos.splice(taskIndex, 1);
+    setTodos(newTodos);
+    console.log(newTodos);
+  };
 
   return (
     <React.Fragment>
     <div className='container'>
-      <div className='first-containerv1'>
-      <div className='first-container'>
-        <TodoTitle/>
-        <TodoList>
-            {defaultTodos.map(todos => (
-               <TodoTask key ={todos.text} contains={todos.text} completed={todos.completed} /> 
-            ))}
-        </TodoList>
-        <TodoSubmit/>  
-        </div>
-      </div>
       <div className='second-container'>
         <div className='secondo-container'>
           <TodoTittle completed={completeTask} total={totalTask}/>
           <TodoInput 
           searchValue = {searchValue} setSearchValue = {setSearchValue}
           >
+          <TodoTitle/>  
             <TodoList>
-            {searchedTools.map(todos => (
-               <TodoTask key ={todos.text} contains={todos.text} completed={todos.completed} /> 
+            {searchedTools.map(todo => (
+               <TodoTask key ={todo.text} contains={todo.text} completed={todo.completed} onComplete={() => addTask(todo.text)} onDelete={() => deleteTask(todo.text)} /> 
             ))}
             </TodoList>
           </TodoInput>
+          <div> <TodoSubmit/>  </div>
         </div>
       </div>
     </div>

@@ -2,38 +2,21 @@
     height: 100vh;
     width: 100%;
     display: grid;
-    grid-template-columns: auto 2fr auto;
 }
 
 .title  {
     color: white;
 }
 
-.first-containerv1 {
-    width: 110vh;
-    background: rgb(63,223,251);
-    background: radial-gradient(circle, rgba(63,223,251,1) 0%, rgba(199,199,199,1) 100%);
-    border-radius: 3px;
-    border: 1px solid black;
-}
-
-.first-container {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border:1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    height: 95%;
-    width: 95%;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    text-align: center;
-}
-
 ul {
     padding: 11px;
+    width: 50%;
+}
+
+.main-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .todos-box {
@@ -43,12 +26,10 @@ ul {
     border-radius: 20px;
     border:1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    
 }
 
 .todo-main {
     display: flex;
-    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -62,9 +43,9 @@ ul {
 }
 
 .delete-logo {
-    position: absolute;
+    width: 30px;
     top: 9px;
-    right: 281px;
+    margin-left: 20px;
 }
 
 .check-logo:hover {
@@ -76,14 +57,13 @@ ul {
 }
 
 .submit-container {
-    display: flex;
-    align-content: center;
+    margin-top: 20px;
 }
 
 .input-submit {
-    padding-left: 100px;
+    margin-left: 420px;
     height: 40px;
-    width: 90%;
+    width: 50%;
     padding: 7px 0;
     font-size: 22px;
     border: 0;
@@ -123,12 +103,17 @@ ul {
     text-align: center;
 }
 
+.submit-container {
+    display: flex;
+
+}
+
 .input-filtrar {
     margin-bottom: 40px;
     padding-top: 22px;
     padding-left: 100px;
     height: 40px;
-    width: 90%;
+    width: 40%;
     padding: 7px 0;
     font-size: 22px;
     border: 0;
