@@ -15,9 +15,20 @@ const defaultTodos = [
 ];
 
 function TodoExample() {
+  //  localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+
+  // Local-store information
+  const getLocalInfo = localStorage.getItem('TODOS_V1');
+  let parsedInfo = JSON.parse(getLocalInfo);
+  
+  if (!parsedInfo) {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedInfo = [];
+  } 
+
   // React states
   const [searchValue, setSearchValue] = React.useState('');
-  const [todo, setTodos] = React.useState(defaultTodos);
+  const [todo, setTodos] = React.useState(parsedInfo);
   
   const completeTask = todo.filter(todo => todo.completed).length;
   const totalTask = todo.length;
@@ -30,19 +41,29 @@ function TodoExample() {
     }
   )
   
+  const modTask = (newTodos) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
+    setTodos(newTodos);
+  } 
+
+  const messagelog = () => {
+    const message = localStorage.getItem('TODOS_V1');
+    const parseMessage =  JSON.parse(message);
+    console.log(parseMessage);
+  }
+
   const addTask = (text) => {
     const newTodos = [...todo]
     const taskIndex  = newTodos.findIndex(todo => (todo.text == text)) 
     newTodos[taskIndex].completed = true;
-    setTodos(newTodos);
+    modTask(newTodos);
   };
 
   const deleteTask = (text) => {
     const newTodos = [...todo];
     const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
     newTodos.splice(taskIndex, 1);
-    setTodos(newTodos);
-    console.log(newTodos);
+    modTask(newTodos);
   };
 
   return (
@@ -61,7 +82,7 @@ function TodoExample() {
             ))}
             </TodoList>
           </TodoInput>
-          <div> <TodoSubmit/>  </div>
+          <div> <TodoSubmit messageLog = {() => messagelog()}/>  </div>
         </div>
       </div>
     </div>
