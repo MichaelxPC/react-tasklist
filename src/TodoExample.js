@@ -1,11 +1,11 @@
-import React from 'react'
-import { TodoTittle } from './TodoTittle';
-import { TodoInput } from './TodoInput';
-import { TodoList } from './TodoList';
-import { TodoTask } from './TodoTask';
-import { TodoSubmit } from './TodoSubmit';
+import { TodoTittle } from './Components/TodoTittle';
+import { TodoInput } from './Components/TodoInput';
+import { TodoList } from './Components/TodoList';
+import { TodoTask } from './Components/TodoTask';
+import { TodoSubmit } from './Components/TodoSubmit';
+import TodoTitle from './Components/TodoTitle';
 import './TodoExample.css';
-import TodoTitle from './TodoTitle';
+import React from 'react'
 
 const defaultTodos = [
      {text: 'Hacer cursos en platzi', completed: true},
@@ -18,12 +18,12 @@ function StateTask() {
   // Local-store information
   const getLocalInfo = localStorage.getItem('TODOS_V1');
   let parsedInfo = JSON.parse(getLocalInfo);
+  const [todo, setTodos] = React.useState(parsedInfo);
   
   if (!parsedInfo) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedInfo = [];
+  localStorage.setItem('TODOS_V1', JSON.stringify([]));
+  parsedInfo = [];
   } 
-  const [todo, setTodos] = React.useState(parsedInfo);
 
   const modTask = (newTodos) => {
     localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
@@ -35,6 +35,7 @@ function StateTask() {
 
 function TodoExample() {
   // React states
+  //localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos))
   const [todo, setTodos] = StateTask();
   const [searchValue, setSearchValue] = React.useState('');
   
@@ -57,14 +58,14 @@ function TodoExample() {
 
   const addTask = (text) => {
     const newTodos = [...todo];
-    const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
+    const taskIndex  = newTodos.findIndex(todo => (todo.text === text));
     newTodos[taskIndex].completed = true;
     setTodos(newTodos);
   };
 
   const deleteTask = (text) => {
     const newTodos = [...todo];
-    const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
+    const taskIndex  = newTodos.findIndex(todo => (todo.text === text));
     newTodos.splice(taskIndex, 1);
     setTodos(newTodos);
   };
