@@ -1,5 +1,5 @@
-import checkMark from './imgs/checkmark.png';
-import deleteMark from './imgs/delete.png';
+import checkMark from '../imgs/checkmark.png';
+import deleteMark from '../imgs/delete.png';
 
 
 function TodoTask({completed, contains, onComplete, onDelete}) {

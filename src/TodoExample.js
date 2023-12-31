@@ -14,9 +14,7 @@ const defaultTodos = [
      {text: 'Tomar notar', completed: true},
 ];
 
-function TodoExample() {
-  //  localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
-
+function StateTask() {
   // Local-store information
   const getLocalInfo = localStorage.getItem('TODOS_V1');
   let parsedInfo = JSON.parse(getLocalInfo);
@@ -25,10 +23,20 @@ function TodoExample() {
     localStorage.setItem('TODOS_V1', JSON.stringify([]));
     parsedInfo = [];
   } 
-
-  // React states
-  const [searchValue, setSearchValue] = React.useState('');
   const [todo, setTodos] = React.useState(parsedInfo);
+
+  const modTask = (newTodos) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
+    setTodos(newTodos);
+  } 
+
+  return [todo, modTask];
+}
+
+function TodoExample() {
+  // React states
+  const [todo, setTodos] = StateTask();
+  const [searchValue, setSearchValue] = React.useState('');
   
   const completeTask = todo.filter(todo => todo.completed).length;
   const totalTask = todo.length;
@@ -37,33 +45,28 @@ function TodoExample() {
       const searchInput = searchValue.toLocaleLowerCase();
       const todoText = todo.text.toLowerCase();
 
-      return todoText.includes(searchInput)
+      return todoText.includes(searchInput);
     }
   )
-  
-  const modTask = (newTodos) => {
-    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
-    setTodos(newTodos);
-  } 
 
   const messagelog = () => {
     const message = localStorage.getItem('TODOS_V1');
-    const parseMessage =  JSON.parse(message);
+    const parseMessage = JSON.parse(message);
     console.log(parseMessage);
   }
 
   const addTask = (text) => {
-    const newTodos = [...todo]
-    const taskIndex  = newTodos.findIndex(todo => (todo.text == text)) 
+    const newTodos = [...todo];
+    const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
     newTodos[taskIndex].completed = true;
-    modTask(newTodos);
+    setTodos(newTodos);
   };
 
   const deleteTask = (text) => {
     const newTodos = [...todo];
     const taskIndex  = newTodos.findIndex(todo => (todo.text == text));
     newTodos.splice(taskIndex, 1);
-    modTask(newTodos);
+    setTodos(newTodos);
   };
 
   return (
