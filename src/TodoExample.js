@@ -16,29 +16,30 @@ const defaultTodos = [
 
 function StateTask() {
   // Local-store information
-  const getLocalInfo = localStorage.getItem('TODOS_V1');
-  let parsedInfo = JSON.parse(getLocalInfo);
-  const [todo, setTodos] = React.useState(parsedInfo);
-  
-  if (!parsedInfo) {
-  localStorage.setItem('TODOS_V1', JSON.stringify([]));
-  parsedInfo = [];
+  const [todo, setTodos] = React.useState();
+  let parsedInfo;
+    const getLocalInfo = localStorage.getItem('TODOS_V1');
+    parsedInfo = JSON.parse(getLocalInfo);
+    if (!parsedInfo) {
+        localStorage.setItem('TODOS_V1', JSON.stringify([]));
+        parsedInfo = [];
+    } else {
+      }
+    const modTask = (newTodos) => {
+      localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
+      setTodos(newTodos);
   } 
 
-  const modTask = (newTodos) => {
-    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
-    setTodos(newTodos);
-  } 
-
-  return [todo, modTask];
+  return {todo, modTask};
 }
 
 function TodoExample() {
   // React states
   //localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos))
-  const [todo, setTodos] = StateTask();
+  const {todo, modTask: setTodos} = StateTask();
   const [searchValue, setSearchValue] = React.useState('');
   
+  console.log(todo);
   const completeTask = todo.filter(todo => todo.completed).length;
   const totalTask = todo.length;
   const searchedTools = todo.filter(
@@ -81,6 +82,7 @@ function TodoExample() {
           >
           <TodoTitle/>  
             <TodoList>
+              
             {searchedTools.map(todo => (
                <TodoTask key ={todo.text} contains={todo.text} completed={todo.completed} onComplete={() => addTask(todo.text)} onDelete={() => deleteTask(todo.text)} /> 
             ))}
