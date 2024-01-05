@@ -1,3 +1,9 @@
+:root {
+    --loading-grey: #ededed;
+    --loading-pink: rgb(255, 202, 225);
+  }
+  
+
 .container {
     height: 100vh;
     width: 100%;
@@ -17,6 +23,15 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.todos-box {
+    background: linear-gradient(135deg, rgba(252, 250, 250, 0.1), rgba(250, 250, 250, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .todos-box {
@@ -159,4 +174,44 @@ ul {
 
 .task-tachado {
     text-decoration: line-through;
+}
+
+.div-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.todo-main-skeleton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.loading {
+    background-color: var(--loading-pink);
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, .5) 50%,
+      rgba(255, 255, 255, 0) 60%
+    ) var(--loading-grey);
+    background-size: 200% 100%;
+    background-position-x: 180%;
+    animation: 1s loading ease-in-out infinite;
+    border-radius: 20px;
+  }
+
+@keyframes loading {
+    to {
+      background-position-x: -20%;
+    }
+}
+
+.loading span {
+    min-height: 1.6rem;
+    border-radius: 4px;
+    animation-delay: .05s;
 }
