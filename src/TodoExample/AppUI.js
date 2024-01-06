@@ -6,21 +6,23 @@ import { TodoTask } from '../Components/TodoTask';
 import { TodoSubmit } from '../Components/TodoSubmit';
 import { TodoTitle } from '../Components/TodoTitle';
 import { TodoTaskSkeleton } from '../Components/TodoTaskSkeleton';
+import { TaskContext } from '../Context';
 
-function AppUi({
-    completeTask,
-    totalTask,
-    searchValue,
-    setSearchValue,
-    loanding,
-    error,
-    searchedTools,
-    taskNewName,
-    setTaskNewName,
-    addListTask,
-    addTask,
-    deleteTask
-}) {
+function AppUi() {
+  const {
+    completeTask: completeTask,
+    totalTask: totalTask,
+    searchValue: searchValue,
+    setSearchValue: setSearchValue,
+    loanding: loanding,
+    error: error,
+    searchedTools: searchedTools,
+    taskNewName: taskNewName,
+    setTaskNewName:setTaskNewName,
+    addListTask: addListTask,
+    addTask: addTask,
+    deleteTask: deleteTask,
+  } = React.useContext(TaskContext);
     return (
         <>
         <div className='container'>
