@@ -7,6 +7,9 @@ import { TodoSubmit } from '../Components/TodoSubmit';
 import { TodoTitle } from '../Components/TodoTitle';
 import { TodoTaskSkeleton } from '../Components/TodoTaskSkeleton';
 import { TaskContext } from '../Context';
+import { Modal } from '../Modal';
+import { TaskForm } from '../Components/TaskForm';
+
 
 function AppUi() {
   const {
@@ -22,6 +25,9 @@ function AppUi() {
     addListTask: addListTask,
     addTask: addTask,
     deleteTask: deleteTask,
+    openFormList,
+    closeFormList,
+    openForm,
   } = React.useContext(TaskContext);
     return (
         <>
@@ -47,6 +53,10 @@ function AppUi() {
                 ))}
                 </TodoList>
               </TodoInput>
+              {openForm && 
+              <Modal>
+                <TaskForm></TaskForm>
+              </Modal>}
               <div> <TodoSubmit taskNewName={taskNewName} setTaskNewName={setTaskNewName} addListTask = {() => addListTask(taskNewName)}/>  </div>
             </div>
           </div>

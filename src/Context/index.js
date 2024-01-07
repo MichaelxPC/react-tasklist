@@ -7,6 +7,7 @@ function TaskProvider({children}) {
     const {todo, modTask: setTodos, loanding, error} = StateTask([]);
     const [searchValue, setSearchValue] = React.useState('');
     const [taskNewName, setTaskNewName] = React.useState('');
+    const [openForm, setOpenForm] = React.useState(false);
     
     console.log(todo);
     const completeTask = todo.filter(todo => todo.completed).length;
@@ -41,6 +42,14 @@ function TaskProvider({children}) {
         setTodos(newTodos);
     }
 
+    const openFormList = () => {
+        setOpenForm(true);
+    }
+
+    const closeFormList = () => {
+        setOpenForm(false);
+    }
+
     return (
         <TaskContext.Provider value={{
             completeTask,
@@ -55,6 +64,9 @@ function TaskProvider({children}) {
             addListTask,
             addTask,
             deleteTask,
+            openFormList,
+            closeFormList,
+            openForm,
         }}>
             {children}
         </TaskContext.Provider>
